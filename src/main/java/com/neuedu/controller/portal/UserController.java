@@ -119,4 +119,23 @@ public class UserController {
         }
         return ServerResponse.createServerResponseByError(ResponseCode.USER_NOT_LOGIN.getStatus(),ResponseCode.USER_NOT_LOGIN.getMsg());
     }
+
+
+    // 登录状态下修改个人信息
+    @RequestMapping("/update_information.do")
+    public ServerResponse update_information(HttpSession session,User userinfo){
+        User user=(User)session.getAttribute(Const.CURREMTUSER);
+        if (user==null) {
+            return ServerResponse.createServerResponseByError(ResponseCode.USER_NOT_LOGIN.getStatus(), ResponseCode.USER_NOT_LOGIN.getMsg());
+        }
+            userinfo.setUid(user.getUid());
+            ServerResponse serverResponse = userService.update_information(userinfo);
+            if (serverResponse.isSuccess()){
+                // 更新session中 信息
+                User usernew=userService.findUserByUserid(user.getUid());
+                session.setAttribute(Const.CURREMTUSER,usernew);
+            }
+            return serverResponse;
+    }
+
 }

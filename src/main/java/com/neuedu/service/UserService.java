@@ -3,7 +3,6 @@ package com.neuedu.service;
 import com.neuedu.commen.ServerResponse;
 import com.neuedu.entity.User;
 
-import javax.servlet.http.HttpSession;
 
 public interface UserService {
 
@@ -21,4 +20,8 @@ public interface UserService {
     ServerResponse forget_reset_password(String username,String passwordNew,String forgetToken);
     // 登录状态改密
     ServerResponse reset_password(User user, String passwordOld, String passwordNew);
+    // 登录状态下修改个人信息
+    ServerResponse update_information(User user);
+    // 根据user_id 查询信息
+    User findUserByUserid(Integer uid);
 }

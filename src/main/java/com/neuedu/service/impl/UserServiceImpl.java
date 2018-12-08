@@ -11,9 +11,6 @@ import com.neuedu.util.MD5Utils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 @Service
@@ -220,6 +217,30 @@ public class UserServiceImpl implements UserService {
         return ServerResponse.createServerResponseBySucess();
     }
 
+
+    // 登录状态修改信息
+    @Override
+    public ServerResponse update_information(User user) {
+
+        // step1:非空校验
+        if (user==null){
+            return ServerResponse.createServerResponseByError("用户未登录");
+        }
+        // step2:更新信息
+        int result=userMapper.updateUserBySelectActive(user);
+        if (result>0){
+            return ServerResponse.createServerResponseBySucess();
+        }
+
+        return ServerResponse.createServerResponseByError("更新失败");
+    }
+
+    @Override
+    public User findUserByUserid(Integer uid) {
+
+        return userMapper.selectByPrimaryKey(uid);
+
+    }
 
 
 }

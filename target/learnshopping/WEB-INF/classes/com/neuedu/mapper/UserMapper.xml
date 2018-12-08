@@ -97,4 +97,28 @@
     update usertable set password = #{password},
     updatetime = now() where username=#{username}
   </update>
+
+  <update id="updateUserBySelectActive" parameterType="map">
+    update usertable
+    <set>
+      <if test="email!=null">
+        email = #{email},
+      </if>
+      <if test="rtel!=null">
+        rtel = #{rtel},
+      </if>
+      <if test="question!=null">
+        question = #{question},
+      </if>
+      <if test="answer!=null">
+        answer = #{answer},
+      </if>
+      <if test="role!=null">
+        role = #{role},
+      </if>
+
+      updatetime = now()
+    </set>
+    where uid = #{uid}
+  </update>
 </mapper>
