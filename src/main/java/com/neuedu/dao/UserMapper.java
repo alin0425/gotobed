@@ -1,6 +1,8 @@
 package com.neuedu.dao;
 
 import com.neuedu.entity.User;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface UserMapper {
@@ -43,4 +45,25 @@ public interface UserMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(User record);
+
+    int checkUsername(String username);
+
+    int checkEmail(String email);
+
+    User selectByusernameAndpassword(@Param("username") String username, @Param("password") String password);
+
+    // 根据用户名查询问题
+    String selectQuestionByUsername(String username);
+    // 校验答案
+    int checkAnswerByUsernameAndQuestion(@Param("username") String username,@Param("question") String question,@Param("answer") String answer);
+    // 根据用户名更新密码
+    int updatePasswordByUsername(@Param("username") String username,@Param("password") String passwordNew);
+
+
+
+
+
+
+
+
 }
