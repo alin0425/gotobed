@@ -1,6 +1,7 @@
 package com.neuedu.entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Type {
     /**
@@ -199,5 +200,19 @@ public class Type {
      */
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Type type = (Type) o;
+        return Objects.equals(id, type.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

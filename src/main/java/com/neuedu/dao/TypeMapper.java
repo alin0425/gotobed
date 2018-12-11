@@ -43,4 +43,10 @@ public interface TypeMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Type record);
+
+
+    // 查询子类（平级）
+    List<Type> findChildCategory(Integer id);
+
+
 }
